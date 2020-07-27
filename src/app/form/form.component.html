@@ -1,0 +1,140 @@
+
+
+<form #f = ngForm  (ngSubmit)="submit(f)"  >
+
+<div class="form-group">
+
+  <label for="First name"> First name</label>
+  <input
+    required
+    minlength="4"
+    ngModel
+    name="firstname"
+    #firstName="ngModel"
+    class="form-control"
+    [ngClass]="{
+    'is-invalid' : !firstName.valid && firstName.touched,
+    'is-valid' : firstName.valid}"
+    type="text">
+<br>
+  <div class="alert alert-danger"
+       *ngIf="firstName.touched && !firstName.valid">
+    <div
+      *ngIf="firstName.errors.required">Ce champ est obligatoire
+    </div>
+
+    <div
+      *ngIf="firstName.errors.minlength">Ce champ doit contenir au moins 4 caractères
+    </div>
+
+  </div>
+
+</div>
+
+  <div class="form-group">
+    <label for="Last name"> Last name</label>
+    <input
+      required
+      ngModel
+      name="lastname"
+      #lastname="ngModel"
+      class="form-control"
+      [ngClass]="{
+      'is-valid' : lastname.valid,
+      'is-invalid' : lastname.touched && lastname.invalid
+      }"
+      type="text">
+    <br>
+    <div class="alert alert-danger" *ngIf="lastname.touched && lastname.invalid">
+
+      <div *ngIf="lastname.errors.required">
+        Ce champ est obligatoire
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <label for="comment">Comment</label>
+    <textarea
+      required
+      ngModel
+      name="comment"
+      #comment="ngModel"
+      class="form-control"
+      [ngClass]="{
+       'is-valid' : comment.valid,
+       'is-invalid' : comment.touched && comment.invalid
+
+      }"
+      >
+
+    </textarea>
+    <br>
+    <div class="alert alert-danger" *ngIf="comment.touched && comment.invalid">
+      <div *ngIf="comment.errors.required">
+       Ce champ est obligatoire
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label> Méthode de contact</label>
+
+    <select multiple class="form-control" ngModel name="contactMethode">
+
+      <option></option>
+      <option>Mail</option>
+      <option>Téléphone</option>
+      <option>Sms</option>
+
+    </select>
+
+
+  </div>
+
+  <div class="form-group">
+    <div class="form-check">
+      <input class="form-check-input" type="radio" ngModel name="contactMethode2" value="1" >
+      <label class="form-check-label" for="exampleRadios1">
+        Mail
+      </label>
+    </div>
+    <div class="form-check">
+      <input  class="form-check-input" type="radio" ngModel name="contactMethode2" value="2" >
+      <label class="form-check-label" for="exampleRadios1">
+        Téléphone
+      </label>
+    </div>
+
+  </div>
+
+
+  <div class="form-group">
+
+  <div class="form-check">
+    <input ngModel name="subscribe" class="form-check-input" type="checkbox" >
+    <label class="form-check-label" for="defaultCheck1">
+      S'abonner
+    </label>
+  </div>
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-primary" [disabled]="!f.valid">Enregistrer</button>
+  </div>
+
+  <p>
+    {{f.value | json}}
+
+  </p>
+
+
+</form>
